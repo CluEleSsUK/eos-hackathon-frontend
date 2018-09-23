@@ -9,7 +9,7 @@ const VerificationResultView = props => {
   return (
     <div className={"verification"}>
       <div>
-        <div>Passed verification</div>
+        <div>Verification status</div>
         <div><ColorCoded predicate={props.result["status"] === "SUCCESS"}>{props.result["status"]}</ColorCoded></div>
         <div>ID verified</div>
         <div><Verified predicate={props.result["id_verified"]}/></div>
