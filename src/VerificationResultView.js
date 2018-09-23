@@ -3,7 +3,7 @@ import "./verification-result-view.css";
 
 const VerificationResultView = props => {
   if (!props.result) {
-    return <div>Loading...</div>
+    return <div>Waiting for the EOS user to accept your request...</div>
   }
 
   return (
