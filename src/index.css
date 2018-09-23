@@ -1,11 +1,16 @@
 body {
   padding: 0;
-  margin: 5em;
   font-family: "PoppinsRegular",sans-serif;
   background: #5b67a8;
   color: white;
 }
 
+body > div {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20%;
+  width: 30%;
+}
 .alt-text {
   color: #eebbcd;
 }

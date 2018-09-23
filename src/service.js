@@ -28,23 +28,32 @@ function requestVerificationFor(username) {
   }))
 }
 
-function verificationResult() {
+function verificationResult(username) {
   return from(client.getTableRows({
     code: "rentcontract",
     scope: "rentcontract",
     table: "requests",
     json: true,
-  })).pipe(mergeMap(resultOrError), retry(10), timeout(60000));
+    limit: 100
+  })).pipe(mergeMap(rows => resultOrError(rows, username)), retry(10), timeout(60000));
 }
 
-function resultOrError(response) {
+function resultOrError(response, username) {
   // if response doesnt contain the permission
   // throw an error to do a retry
   if (!response || !response.rows || response.rows.length === 0) {
     return throwError(new Error());
   }
 
+  if (userHasNotYetVerified(response, username)) {
+    return throwError(new Error());
+  }
+
   return of(response.rows);
+}
+
+function userHasNotYetVerified(response, username) {
+  return response.rows.filter(r => r["authorizer"] === username).length === 0;
 }
 
 export {requestVerificationFor, verificationResult}

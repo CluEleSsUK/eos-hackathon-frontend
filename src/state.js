@@ -20,14 +20,15 @@ function startVerificationAndUpdateOnResult(state) {
   stateSubject.next(nextState);
 
   requestVerificationFor(state.username)
-    .pipe(verificationResult)
+    .pipe(() => verificationResult(state.username))
     .subscribe({
-      next: response => onResultReceived(nextState, mapRowsToResult(response)),
-      error: err => console.log("error", err)
+      next: rows => onResultReceived(nextState, mapRowsToResult(rows)),
+      error: err => console.log("Error", err)
     });
 }
 
 function onResultReceived(state, result) {
+  console.log("result received");
   stateSubject.next(merge(state, { result }));
 }
 
@@ -37,8 +38,7 @@ function mapRowsToResult(rows) {
 
   return rows.map(r => r.data)
     .map(convertSingleQuotesToDouble)
-    .map(JSON.parse)
-    .map(j => j["status"]);
+    .map(JSON.parse)[0];
 }
 
 function onRestart() {

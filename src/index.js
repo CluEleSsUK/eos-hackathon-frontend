@@ -9,8 +9,7 @@ state.asObservable()
   .pipe(map(nextState => mergeWithActions(nextState)))
   .subscribe({
     next: renderNextView,
-    error: err => console.log("error", err),
-    complete: () => console.log("wtf, it completed")
+    error: err => console.log("error", err)
   });
 
 function mergeWithActions(state) {

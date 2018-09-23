@@ -1,0 +1,29 @@
+.verification {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.verification > div {
+    display: flex;
+    flex-flow: row wrap;
+    height: 100%;
+    padding: 1em;
+}
+
+.verification > div > div {
+    width: 50%;
+    height: 50%;
+}
+
+.verification > button {
+    margin-left: -1em;
+}
+
+.verified {
+    color: #eebbcd;
+}
+
+.unverified {
+    color: #dbad9a;
+}
