@@ -10,7 +10,7 @@ const VerificationResultView = props => {
     <div className={"verification"}>
       <div>
         <div>Passed verification</div>
-        <div><Verified predicate={props.result["status"]}/></div>
+        <div><ColorCoded predicate={props.result["status"] === "SUCCESS"}>{props.result["status"]}</ColorCoded></div>
         <div>ID verified</div>
         <div><Verified predicate={props.result["id_verified"]}/></div>
         <div>Credit check passed</div>
@@ -21,8 +21,13 @@ const VerificationResultView = props => {
   )
 };
 
-const Verified = ({predicate}) => predicate
-  ? <span className={"verified"}>&#10003; Verified</span>
-  : <span className={"unverified"}>&times;&nbsp; Action required</span>;
+const Verified = ({predicate}) =>
+  <ColorCoded predicate={predicate}>
+    { predicate
+      ? <div>&#10003; Verified</div>
+      : <div>&times;&nbsp; Action required</div> }
+  </ColorCoded>;
+
+const ColorCoded = ({ predicate, children }) => <span className={predicate ? "verified" : "unverified"}>{children}</span>;
 
 export default VerificationResultView;
