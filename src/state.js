@@ -3,7 +3,7 @@ import {verificationResult, requestVerificationFor} from "./service";
 
 const initialState = {
   requested: false,
-  username: null,
+  username: "",
   result: null
 };
 
