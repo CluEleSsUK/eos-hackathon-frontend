@@ -6,15 +6,16 @@ import App from "./App";
 import "./index.css";
 
 state.asObservable()
-  .pipe(map(nextState => Object.assign({}, { ...nextState, ...bindStateToActions(nextState) })))
+  .pipe(map(nextState => mergeWithActions(nextState)))
   .subscribe({
     next: renderNextView,
     error: err => console.log("error", err),
     complete: () => console.log("wtf, it completed")
   });
 
-function bindStateToActions(state) {
+function mergeWithActions(state) {
   return {
+    ...state,
     onUsernameChanged: onUsernameChanged.bind(this, state),
     startVerification: startVerificationAndUpdateOnResult.bind(this, state),
     onRestart: onRestart.bind(this, state)

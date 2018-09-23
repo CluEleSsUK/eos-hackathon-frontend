@@ -1,6 +1,6 @@
 import React from "react";
 
-const VerificationResult = props => {
+const VerificationResultView = props => {
   if (!props.result) {
     return <div>Loading...</div>
   }
@@ -8,9 +8,9 @@ const VerificationResult = props => {
   return (
     <div>
       <p>Passed verification: {"" + props.result}</p>
-      <button value={"Start again"} onClick={props.onRestart}/>
+      <button value={"Start again"} onClick={props.onRestart}>Restart</button>
     </div>
   )
 };
 
-export default VerificationResult;
+export default VerificationResultView;

@@ -10,12 +10,14 @@ const initialState = {
 const stateSubject = new BehaviorSubject(initialState);
 
 function onUsernameChanged(state, username) {
-  stateSubject.next(Object.assign({}, {...state, username}));
+  stateSubject.next(merge(state, { username }));
 }
 
+const merge = (state, val) => Object.assign({}, {...state, ...val});
+
 function startVerificationAndUpdateOnResult(state) {
-  const nextState = {...state, requested: true};
-  stateSubject.next(Object.assign({}, nextState));
+  const nextState = merge(state, { requested: true });
+  stateSubject.next(nextState);
 
   requestVerificationFor(state.username)
     .pipe(verificationResult)
@@ -25,17 +27,18 @@ function startVerificationAndUpdateOnResult(state) {
     });
 }
 
-function mapRowsToResult(rows) {
-  return rows.map(r => r.data)
-    // easier than stopping C++ using ''
-    .map(r => r.replace(/\'/g, "\""))
-    .map(r => JSON.parse(r))
-    .map(j => j["status"]);
+function onResultReceived(state, result) {
+  stateSubject.next(merge(state, { result }));
 }
 
-function onResultReceived(state, result) {
-  console.log("on result received", result);
-  stateSubject.next(Object.assign({}, {...state, result}));
+function mapRowsToResult(rows) {
+  // easier than stopping C++ using ''
+  const convertSingleQuotesToDouble = r => r.replace(/'/g, "\"");
+
+  return rows.map(r => r.data)
+    .map(convertSingleQuotesToDouble)
+    .map(JSON.parse)
+    .map(j => j["status"]);
 }
 
 function onRestart() {

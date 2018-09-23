@@ -1,5 +1,23 @@
 body {
-  margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  margin: 5em;
+  font-family: "PoppinsRegular",sans-serif;
+  background: #5b67a8;
+  color: white;
+}
+
+.alt-text {
+  color: #eebbcd;
+}
+
+input, button {
+  padding: 1em 1.5em 1em 1.5em;
+}
+
+button {
+  background: #f6d18a;
+  color: black;
+  text-transform: uppercase;
+  font-family: "PoppinsRegular",sans-serif;
+  margin: 2em;
 }

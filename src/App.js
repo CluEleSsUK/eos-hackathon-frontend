@@ -1,13 +1,13 @@
 import React from "react";
-import VerificationRequest from "./VerificationRequest";
-import VerificationResult from "./VerificationResult";
+import VerificationRequestView from "./VerificationRequestView";
+import VerificationResultView from "./VerificationResultView";
 
 const App = props => {
   if (!props.requested) {
-    return <VerificationRequest { ...props } /> ;
+    return <VerificationRequestView { ...props } /> ;
   }
 
-  return <VerificationResult { ...props } />;
+  return <VerificationResultView { ...props } />;
 };
 
 export default App;

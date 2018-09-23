@@ -38,8 +38,8 @@ function verificationResult() {
 }
 
 function resultOrError(response) {
-  //if response doesnt contain the permission
-  //throw an error
+  // if response doesnt contain the permission
+  // throw an error to do a retry
   if (!response || !response.rows || response.rows.length === 0) {
     return throwError(new Error());
   }
