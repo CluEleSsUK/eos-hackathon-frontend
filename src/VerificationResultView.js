@@ -3,11 +3,12 @@ import "./verification-result-view.css";
 
 const VerificationResultView = props => {
   if (!props.result) {
-    return <div>Waiting for the EOS user to accept your request...</div>
+    return <div>Waiting for {props.username} to accept your request...</div>
   }
 
   return (
     <div className={"verification"}>
+      <h2>{props.username}</h2>
       <div>
         <div>Verification status</div>
         <div><ColorCoded predicate={props.result["status"] === "SUCCESS"}>{props.result["status"]}</ColorCoded></div>
